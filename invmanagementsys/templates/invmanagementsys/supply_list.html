@@ -1,0 +1,30 @@
+{% extends "invmanagementsys/base.html" %}
+{% block content %}
+
+<h2>Suppliers</h2>
+
+<table class = "table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Invoice_number</th>
+            <th>Supplier</th>
+            <th>Supply_date</th>  
+        
+        
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for supply in supplies %}
+        <tr>
+           <td>{{ supply.id }}</td>
+           <td>{{ supply.invoice_number }}</td>
+           <td>{{ supply.supplier }}</td>
+           <td>{{ supply.supply_date}}</td>
+           
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

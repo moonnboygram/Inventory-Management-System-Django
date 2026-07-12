@@ -20,6 +20,17 @@ def category_list(request):
      return render(request, "invmanagementsys/category_list.html",
                    {"categories": categories})
 
+def supply_list(request):
+     supplies = Supply.objects.all()
+     return render(request, "invmanagementsys/supply_list.html",
+                   {"supplies": supplies})
+
+def low_stock_list(request):
+     products = Product.objects.filter(quantity__lte=20)
+     return render(request, "invmanagementsys/low_stock_list.html",{
+        "products": products
+     })
+
 def dashboard(request):
     total_products = Product.objects.count()
     total_categories = Category.objects.count()

@@ -40,22 +40,25 @@
     </div>
 
     <div class = "col-md-3">
-        <div class = "card text-white bg-warning">
-            <div class = "card-body">
-                <h5>Total Supplies</h5>
-                <h2> {{ total_supplies }}</h2>
+        <a href="{% url 'supply_list' %}" class="text-decoration-none">
+            <div class = "card text-white bg-warning">
+                <div class = "card-body">
+                    <h5>Total Supplies</h5>
+                    <h2> {{ total_supplies }}</h2>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
     
     <div class = "col-md-3 mt-3">
-        <div class = "card text-white bg-danger">
-            <div class = "card-body">
-                <h5>Low Stock Items</h5>
-                <h2> {{ low_stock }}</h2>
+        <a href="{% url 'low_stock_list' %}" class="text-decoration-none">
+            <div class = "card text-white bg-danger">
+                <div class = "card-body">
+                    <h5>Low Stock Items</h5>
+                    <h2> {{ low_stock }}</h2>
+                </div>
             </div>
-        </div>
-    </div>
+        </a>
 </div>
 
 
