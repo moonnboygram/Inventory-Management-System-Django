@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register ymodels here.
 
-from .models import Supplier, Category, Supply, Product
+from .models import Supplier, Category, GoodsReceived, GoodsReceivedItem, Product
 
 # admin.site.register(Supplier)
 # admin.site.register(Category)
@@ -22,15 +22,22 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
-@admin.register(Supply)
-class SupplyAdmin(admin.ModelAdmin):
-    list_display = ("id", "invoice_number", "supplier", "supply_date")
-    search_fields = ("invoice_number",)
-    list_filter =("supplier", "supply_date")
+@admin.register(GoodsReceived)
+class GoodsReceivedAdmin(admin.ModelAdmin):
+    list_display = ("invoice_number", "supplier", "recieved_date")
+    # search_fields = ("invoice_number",)
+    # list_filter =("supplier", "recieved_date")
+
+@admin.register(GoodsReceivedItem)
+class GoodsReceivedItemAdmin(admin.ModelAdmin):
+    list_display = ("goods_recieved", "product", "quantity_recieved", "cost_price",)
+
+
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "category", "supply", "quantity", "price")
+    list_display = ("id", "name", "category","quantity", "cost_price", "selling_price",)
     search_fields = ("name",)
     list_filter = ("category",)
+  

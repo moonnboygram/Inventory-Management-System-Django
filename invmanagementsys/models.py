@@ -21,23 +21,36 @@ class Category(models.Model):
         return self.name
 
 
-class Supply(models.Model):
+class GoodsReceived(models.Model):
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     invoice_number = models.CharField(max_length=50, unique=True)
-    supply_date =models.DateField()
+    recieved_date = models.DateField()
     
-    class Meta:
-        verbose_name_plural = "Supplies"
+    # class Meta:
+    #     verbose_name_plural = "Supplies"
     def __str__(self):
         return self.invoice_number
+
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    supply = models.ForeignKey(Supply, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=0)
+    cost_price = models.DecimalField(max_digits=10, decimal_places=2)
+    selling_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.name
 
+
+class GoodsReceivedItem(models.Model):
+    goods_recieved = models.ForeignKey(GoodsReceived, on_delete=models.CASCADE)
+
+    product =models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    quantity_recieved = models.PositiveIntegerField()
+
+    cost_price = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    def __str__(self):
+        return self.product.name
