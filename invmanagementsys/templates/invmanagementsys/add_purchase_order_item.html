@@ -1,0 +1,34 @@
+{% extends "invmanagementsys/base.html" %}
+
+{% block content %}
+
+<div class ="container mt-4">
+    
+    <h2>Add Product to Purchase Order</h2>
+    
+    <hr>
+    
+    <p><strong>Purchase Order:</strong> {{ purchase_order.po_number }}</p>
+    
+    <p><strong>Supplier:</strong> {{ purchase_order.supplier }}</p>
+    
+    <form method=""POST>
+    
+        {% crsf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-success">
+            Save Product
+        </button>
+
+        <a href="{% url 'purchase_order_detail' purchase_order.pk %}" 
+           class="btn btn-secondary">
+           Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

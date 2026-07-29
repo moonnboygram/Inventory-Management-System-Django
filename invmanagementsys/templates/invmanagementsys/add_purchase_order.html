@@ -1,0 +1,68 @@
+{% extends "invmanagementsys/base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class = "card shadow">
+
+        <div class = "card-header">
+
+            <h3>Create Purchase Order</h3>
+
+        </div>
+        
+        <div class = "card-body">
+            
+            <from method="POST">
+
+                {% csrf_token %}
+
+                <div class = "mb-3">
+
+                    <label class="form-label">
+                        Supplier
+                    </label>
+                    
+                    {{ form.supplier }}
+
+                    {{ if form.supplier.errors %}}
+                        <div class = "text-danger">
+                            {{form.supplier.errors }}
+                        </div>
+                    {{% endif %}}
+                
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Order Date
+                    </label> 
+                    
+                    {{ from.order_date }}
+
+                    {% if form.order_date.errors %}
+                        <div class="text-danger">
+                            {{ form.order.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <button type = "submit" class="btn btn-success">
+                    Create Purchase Order
+                </button>
+                
+                <a href="{{% url 'purchase_order_list' %}}" class="btn btn-secondary">
+                    Cancel
+                </a>
+            </from>
+
+        </div>
+
+    </div> 
+
+</div>
+
+{% endblock %}

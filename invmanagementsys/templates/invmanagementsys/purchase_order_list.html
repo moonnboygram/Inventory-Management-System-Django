@@ -1,0 +1,120 @@
+{% extends "invmanagementsys/base.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2 class="mb-1">Purchase Orders</h2>
+        <small class="text-muted">
+            Manage all purchase orders
+        </small>
+    </div>
+
+    <a href="{% url 'add_purchase_order' %}"
+       class="btn btn-primary">
+
+        + Create Purchase Order
+
+    </a>
+
+</div>
+
+<table class="table table-bordered table-hover align-middle">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>PO Number</th>
+            <th>Supplier</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th width="120">Action</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for purchase_order in purchase_orders %}
+
+        <tr>
+
+            <td>
+
+                {{ purchase_order.po_number }}
+
+            </td>
+
+            <td>
+
+                {{ purchase_order.supplier }}
+
+            </td>
+
+            <td>
+
+                {{ purchase_order.order_date }}
+
+            </td>
+
+            <td>
+
+                {% if purchase_order.status == "draft" %}
+
+                    <span class="badge bg-warning text-dark">
+                        Draft
+                    </span>
+
+                {% elif purchase_order.status == "approved" %}
+
+                    <span class="badge bg-success">
+                        Approved
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-secondary">
+
+                        {{ purchase_order.status }}
+
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                <a href="{% url 'purchase_order_detail' purchase_order.pk %}"
+                   class="btn btn-sm btn-outline-primary">
+
+                    View
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% empty %}
+
+        <tr>
+
+            <td colspan="5" class="text-center text-danger">
+
+                No Purchase Orders Found.
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

@@ -1,29 +1,100 @@
+
+
+
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Inventory Management System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<head> 
+    <title>Inventory Moonn ERP</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
-<body>
 
-<nav class="navbar navbar-dark bg-dark bg-dark">
-    <div class="container">
+<body class ="bg-light">
 
-        <a class ="navbar-brand" href="/">
-            Inventory Management System
-        </a>
+
+    <!--Top Navbar -->
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class ="container-fluid d-flex justify-content-center">
+            <span class="navbar-brand mb-0 h1">
+
+                Inventory Moonn ERP
+            
+            </span>
         
-        <div>
-            <a class = "text-white me-3" href="/">Dashboard</a>
-            <a class = "text-white me-3" href="/products/">Products</a>
-        </div> 
+        </div>
+    
+    </nav>
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!--SIDEBAR -->
+
+            <div class="col-md-2 bg-dark text-white min-vh-100 p-3">
+
+                <a href="{% url 'dashboard' %}"
+                   class="d-block text-white text-decoration-none mb-4 fs-5 fw-5 fw-bold">
+                   Dashboard
+                </a>
+
+                <hr>
+
+                <h6 class="text-secondary">
+                    PURCHASING
+                </h6>
+
+                <a href="{% url 'purchase_order_list' %}"
+                   class="d-block text-white text-decoration-none mb-2">
+
+                   Purchase Orders
+                
+                </a>
+
+                <h6 href="{% url 'goods_received_list'  %}"
+                     class="d-block text-white text-decoration-none mb-4">
+
+                      Goods Received
+
+                </a>
+
+                <h6 class="text-secondary">
+                    INVENTORY
+                </h6>
+
+                <a href="{% url 'goods_received_list'  %}"
+                   class="d-block text-white text-decoration-none mb-2">
+                   
+                   Products
+                
+                </a>
+
+                <a href="{% url 'category_list' %}"
+                     class="d-block text-white text-decoration-none mb-4">
+                     Categories
+                </a>
+                
+                <h6 class="text-secondary">
+                    MASTER DATA
+                </h6>
+
+                <a href="{% url 'supplier_list' %}"
+                   class ="d-block text-white text-decoration-none">
+                   Suppliers
+                </a>
+            
+            </div>
+        
+               <!-- MAIN CONTENT -->
+            <div class="col-md-10 p-4">
+                  
+                  {% block content %}
+                  
+                  {% endblock %}
+            </div>
+        </div>
     </div>
-</nav>
-
-<div class="container mt-4">
-{% block content %}
-{% endblock %}
-</div>
-
 </body>
 </html>
-

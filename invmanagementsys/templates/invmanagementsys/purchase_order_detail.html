@@ -1,0 +1,81 @@
+{% extends "invmanagementsys/base.html" %}
+
+{% block content %}
+
+<h2>Purchase Order {{ purchase_order.po_number }}</h2>
+
+<p><strong>Supplier:</strong> {{ purchase_order.supplier }}</p>
+
+<p><strong>Order Date:</strong> {{ purchase_order.order_date }}</p>
+ 
+<p><strong>Status:</strong> {{ purchase_order.status }}</p>
+
+{% if purchase_order.status == "draft" %}
+
+<a href="{% url 'approve_purchase_order' purchase_order.pk %}"
+   class="btn btn-success mb-3">
+   Approve Purchase Order
+</a>
+
+{% endif %}
+
+<hr>
+
+<h3>Product</h3>
+
+<a href="{% url 'add_purchase_order_item' purchase_order.pk %}" class="btn btn-primary">
+    Add Product
+</a>
+
+<table class="table table-bordered mt-3">
+    
+    <thead>
+        
+        <tr>
+
+            <th>Product</th>
+
+            <th class="text-end">Quanity</th>
+            <th class="text-end">Unit Cost</th>
+            <th class="text-end">Line Total</th>
+            
+        </tr>
+
+    </thead>
+
+    <tbody>
+        {% for items in items %}
+
+        <tr>
+
+            <td>{{ item.product }}</td>
+            
+            <td class="text-end">
+                {{ item.quantity_ordered }}
+            </td>
+            
+            <td class="text-end">
+                {{ item.cost_price }}
+            </td>
+
+            <td class="text-end">
+                ₦{{ item.line_total }}
+            </td>
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="3">
+                No products added yet.
+            </td>
+        
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

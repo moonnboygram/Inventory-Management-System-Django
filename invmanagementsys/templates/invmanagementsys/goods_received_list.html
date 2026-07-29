@@ -1,0 +1,41 @@
+{% extends "invmanagementsys/base.html" %}
+
+{% block content %}
+
+<h2> Goods Received</h2>
+
+<a href="{% url 'add_goods_received' %}" class="btn btn-primary mb-3">
+    Add Good Received
+</a>
+
+<table class = "table table- bordered table-striped">
+    <thead>
+        <tr>
+            <th>Invoice Number</th>
+            <th>Supplier</th>
+            <th>Received Date</th>
+        </tr>
+    
+    </thead>
+    
+    <tbody>
+        
+        {% for goods in goods_receieved %}
+        <tr>
+            <td>{{ goods.invoice_number }}</td>
+            <td>{{ good.supplier }}</td>
+            <td>{{ goods.received_date }}</td>
+
+        </tr>
+        {% empty %}
+
+        <tr>
+            <td colspan="3">
+                No Goods Received Yet
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
