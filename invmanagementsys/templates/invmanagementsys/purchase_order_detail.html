@@ -2,80 +2,148 @@
 
 {% block content %}
 
-<h2>Purchase Order {{ purchase_order.po_number }}</h2>
+<div class="card shadow-sm mb-4">
 
-<p><strong>Supplier:</strong> {{ purchase_order.supplier }}</p>
 
-<p><strong>Order Date:</strong> {{ purchase_order.order_date }}</p>
- 
-<p><strong>Status:</strong> {{ purchase_order.status }}</p>
+<div class="card-header bg-primary text-white">
+
+    <h4 class="mb-0">Purchase Order Details</h4>
+
+</div>
+
+<div class="card-body">
+
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <strong>PO Number</strong><br>
+
+            {{ purchase_order.po_number }}
+
+        </div>
+
+        <div class="col-md-3">
+
+            <strong>Supplier</strong><br>
+
+            {{ purchase_order.supplier }}
+
+        </div>
+
+        <div class="col-md-3">
+
+            <strong>Order Date</strong><br>
+
+            {{ purchase_order.order_date }}
+
+        </div>
+
+        <div class="col-md-3">
+
+            <strong>Status</strong><br>
+
+            {% if purchase_order.status == "draft" %}
+
+                <span class="badge bg-warning text-dark">Draft</span>
+
+            {% else %}
+
+                <span class="badge bg-success">Approved</span>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<div class="mb-3">
+
+
+<a href="{% url 'add_purchase_order_item' purchase_order.pk %}"
+   class="btn btn-primary">
+
+    Add Product
+
+</a>
 
 {% if purchase_order.status == "draft" %}
 
 <a href="{% url 'approve_purchase_order' purchase_order.pk %}"
-   class="btn btn-success mb-3">
-   Approve Purchase Order
+   class="btn btn-success">
+
+    Approve Purchase Order
+
 </a>
 
 {% endif %}
 
+
+</div>
+
 <hr>
 
-<h3>Product</h3>
+<h3>Products</h3>
 
-<a href="{% url 'add_purchase_order_item' purchase_order.pk %}" class="btn btn-primary">
-    Add Product
-</a>
+<table class="table table-bordered table-hover align-middle mt-3">
 
-<table class="table table-bordered mt-3">
-    
-    <thead>
-        
-        <tr>
 
-            <th>Product</th>
+<thead class="table-dark">
 
-            <th class="text-end">Quanity</th>
-            <th class="text-end">Unit Cost</th>
-            <th class="text-end">Line Total</th>
-            
-        </tr>
+    <tr>
 
-    </thead>
+        <th>Product</th>
 
-    <tbody>
-        {% for items in items %}
+        <th class="text-end">Quantity</th>
 
-        <tr>
+        <th class="text-end">Unit Cost</th>
 
-            <td>{{ item.product }}</td>
-            
-            <td class="text-end">
-                {{ item.quantity_ordered }}
-            </td>
-            
-            <td class="text-end">
-                {{ item.cost_price }}
-            </td>
+        <th class="text-end">Line Total</th>
 
-            <td class="text-end">
-                ₦{{ item.line_total }}
-            </td>
-        </tr>
+    </tr>
 
-        {% empty %}
+</thead>
 
-        <tr>
+<tbody>
 
-            <td colspan="3">
-                No products added yet.
-            </td>
-        
-        </tr>
-        {% endfor %}
+    {% for item in items %}
 
-    </tbody>
+    <tr>
+
+        <td>{{ item.product }}</td>
+
+        <td class="text-end">{{ item.quantity_ordered }}</td>
+
+        <td class="text-end">₦{{ item.cost_price }}</td>
+
+        <td class="text-end">₦{{ item.line_total }}</td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+
+        <td colspan="4" class="text-center">
+
+            No products added yet.
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</tbody>
+
 
 </table>
 
 {% endblock %}
+
+
